@@ -1,7 +1,10 @@
 from django.http import HttpResponse
 from django.db.models import get_model
-from django.utils import simplejson
 from django.contrib.contenttypes.models import ContentType
+try:
+    from django.utils import simplejson as json
+except ImportError:
+    import json
 from favorite.models import Favorite
 
 
@@ -30,6 +33,6 @@ def add_or_remove(request):
                                                          target_object_id=target_object_id).count()}
 
         return HttpResponse(simplejson.dumps(response, ensure_ascii=False),
-                            mimetype='application/json')
+                            content_type='application/json')
 
     return HttpResponse(status=405)
