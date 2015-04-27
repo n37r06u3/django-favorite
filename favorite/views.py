@@ -32,7 +32,7 @@ def add_or_remove(request):
                     'fav_count': Favorite.objects.filter(target_content_type=target_content_type,
                                                          target_object_id=target_object_id).count()}
 
-        return HttpResponse(simplejson.dumps(response, ensure_ascii=False),
+        return HttpResponse(json.dumps(response, ensure_ascii=False),
                             content_type='application/json')
 
     return HttpResponse(status=405)
