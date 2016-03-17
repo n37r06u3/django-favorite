@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.db.models import get_model
+from django.apps import apps
 from django.contrib.contenttypes.models import ContentType
 try:
     from django.utils import simplejson as json
@@ -11,7 +11,7 @@ from favorite.models import Favorite
 def add_or_remove(request):
     if request.is_ajax():
         user = request.user
-        target_model = get_model(*request.POST['target_model'].split('.') or None)
+        target_model = apps.get_model(*request.POST['target_model'].split('.') or None)
         target_content_type = ContentType.objects.get_for_model(target_model)
         target_object_id = request.POST['target_object_id']
 
