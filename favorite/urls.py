@@ -1,6 +1,7 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
+from favorite.views import add_or_remove
 
-urlpatterns = patterns('favorite.views',
-    url(r'^add-or-remove$', 'add_or_remove'),
-)
+urlpatterns = [
+    url(r'^add-or-remove$', add_or_remove),
+]
