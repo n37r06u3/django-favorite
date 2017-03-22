@@ -9,3 +9,6 @@ class Favorite(models.Model):
     target_object_id = models.PositiveIntegerField()
     target = GenericForeignKey('target_content_type', 'target_object_id')
     timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = (('user', 'target_content_type', 'target_object_id'),)
